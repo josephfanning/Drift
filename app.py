@@ -1,6 +1,3 @@
-# TODO - make sure these imports are properly implemented for the server
-# TODO - make sure that the random flashes i haeve popped into else statements of routes are either working properly or are changed to just show 404 errors 
-# import statements for various libraries from flask and other libs that have been used 
 from flask import Flask, request, redirect, url_for, flash, session, render_template
 from flask_sqlalchemy import SQLAlchemy # remember to download flask-sqlalchemy on server of deployment
 from flask_bcrypt import Bcrypt # remmber to download on server!
@@ -158,8 +155,8 @@ def user_posts(username):
             posts = Post.query.filter_by(user_id=user.id).all()
             return render_template('otheruseraccounts.html', user=user, posts=posts)
     else:
-        flash('User not found')
-        return redirect(url_for('index'))
+        return "User not found", 404
+
     
 # app route for the about page
 @app.route("/about")
@@ -181,9 +178,7 @@ def account():
         return render_template('account.html', user=user, posts=posts, num_friends=num_friends, friends=friends)
 
     else:
-        # TODO make sure this is the correct way to display this error
         return "User not found", 404
-        #return redirect(url_for('index'))
 
 # route for the user to log out of their account within the account.html page 
 @app.route("/logout", methods=["GET", "POST"]) # routing for the logout page. returns user to login page 
@@ -231,8 +226,8 @@ def user_account(username):
         friends = [User.query.get(friendship.friend_id) for friendship in friendships]
         return render_template('otheruseraccounts.html', user=user, posts=posts, num_friends=num_friends, friends=friends)
     else:
-        flash('User not found')
-        return redirect(url_for('posts'))
+        return "User not found", 404
+
 
 # route for frienships using the friendship table within the database
 @app.route('/add_friend/<int:friend_id>', methods=['POST'])
@@ -261,17 +256,6 @@ def friends():
     friends = [User.query.get(friendship.friend_id) for friendship in friendships]
     return render_template('friends.html', friends=friends)
 
-
-#with app.app_context():
-#       db.drop_all()
-#       db.create_all() 
-
 # need an app route for /creataccount page
 if __name__ == "__main__":
     app.run(debug=True)  # Run the app in debug mode
-
-# used for resetting the database. only use if needing to add certain variables 
-# or to erase the database
-# keep in mind it needs to be above the app.run line
-
-
