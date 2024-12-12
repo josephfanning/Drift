@@ -256,6 +256,6 @@ def friends():
     friends = [User.query.get(friendship.friend_id) for friendship in friendships]
     return render_template('friends.html', friends=friends)
 
-# need an app route for /creataccount page
+# runs the code
 if __name__ == "__main__":
-    app.run(debug=True)  # Run the app in debug mode
+    app.run(debug=False)  # Run the app in debug mode
