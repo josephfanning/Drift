@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- only here for styling purposes, used in styles.css to make the page fade in-->
+<div class="float-in-wrapper">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- links to the the main CSS file and javascript file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- links to the navbar.css file as well as the navbar.js file for the navbar-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='navbar.css') }}">
+    <script src="{{ url_for('static', filename='navbar.js') }}"></script>
+
+    <title>Drift</title>
+</head>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <!-- uses jinja to include the navbar -->
+            {% include 'navbar.html' %}
+            <!-- also uses jinja to dynamically show the current users username via a query request from the database -->
+            <h1 id="title"> {{ user.username }}</h1>
+        </div>
+    </header>
+
+    <!-- uses jinja to allow the user to add a friend,
+     if the user is not the current user then the user can add the other user as a friend -->
+    <div class="button-wrapper">
+        {% if user.id != session['user_id'] %}
+            <form action="{{ url_for('add_friend', friend_id=user.id) }}" method="POST">
+                <input type="hidden" name="friend_id" value="{{ user.id }}">
+                <input type="submit" id="add-friend-button" value="Add Friend">
+            </form>
+        {% endif %}
+        
+        <!-- flash message to tell the user that htey are already friends. 
+         e.g the user has addded this user as a friend already-->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <p class="flashes">
+            {% for message in messages %}
+            <b>{{ message }}</b>
+            {% endfor %}
+            </p>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- similar code to the code seen in the account page, uses jinja and strftime to show date of creation-->
+    <h3 class="account-info-text"> account created on {{ user.created_at.strftime('%d-%m-%y') }}</h3>
+
+    <!-- uses jinja once again to show the users username and number of friends-->
+    <h2 class="account-info-text" >{{ user.username }}'s Friends: {{ num_friends }}</h2>
+
+    <!-- friend box that shows all of the users friends, these can be clicked on to take you to another other user account page -->
+    <div id="friend-list-wrapper">
+        {% for friend in friends %}
+            <p>
+                <!-- uses href to link usernames to user account pages, if the username is the same as the current user logged in, e.g user_id == session.user_id then link to account.html instead of otheruseraccounts.html -->
+                <a href="{% if friend.id == session.user_id %}{{ url_for('account') }}{% else %}{{ url_for('user_account', username=friend.username) }}{% endif %}">{{ friend.username }}</a>      
+            </p>
+        {% endfor %}
+    </div>
+
+    <h2 class="accounth2"> {{ user.username }}'s Posts</h2>
+
+    <!-- used to show the users posts of the account you clicked on -->
+    <div class="posts-container">
+        {% for post in posts %} 
+            <div class="posts">
+                <p>{{ post.content }}</p>
+                <form action="{{ url_for('delete_post', post_id=post.postID) }}" method="POST">
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+</div>
+ 

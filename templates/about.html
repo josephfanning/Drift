@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- only here for styling purposes, used in styles.css to make the page fade in-->
+<div class="float-in-wrapper">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- links to the the main CSS file and javascript file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- links to the navbar.css file as well as the navbar.js file for the navbar-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='navbar.css') }}">
+    <script src="{{ url_for('static', filename='navbar.js') }}"></script>
+
+    <title>Drift</title>
+</head>
+<body>
+    <header>
+
+        <div class="header-wrapper">
+            <!-- uses jinja templating to include the navbar -->
+            {% include 'navbar.html' %}
+            <h1 id="title">About Drift</h1>
+          </div>
+    </header>
+    
+    <div class="about-text-wrapper">
+        <h2> Drift is a simple, advertisement free social media web app built upon the python flask framework that allows you to share your thoughts with other users. </h2>
+            <br> <h2>Drift has the following features</h2>
+
+        <ul>
+            <li> A secure login system utilising BCrypt to encrypt passwords </li>
+            <li> The ability to view other account's posts </li>
+            <li> The ability to logout from your account utilising session management </li>
+            <li> The ability to delete your account and selected posts associated with your account</li>
+            <li> The ability to add friends, view accounts' friends and posts </li>
+        </ul>
+    </div>  
+
+</body>
+</html>
+</div>
+ 

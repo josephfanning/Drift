@@ -1,0 +1,327 @@
+/* TODO: comment code properly  */
+
+.float-in-wrapper { /* styling for page fade in along with keyfram animation */
+    animation: fadeIn 2s;
+  }
+  
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+  }
+
+/* sets up the styling for the h1 element */
+h1 {
+    font-family: helvetica;
+}
+
+#title {
+    font-size: 50px;
+    font-family: 'helvetica';
+    display: inline-flex;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 0;
+    padding-top: 30px;
+    pointer-events: none;
+}
+
+/* sets up the initial gradient background and defines the colours it will use */
+/* uses GradientBackground which is used by all other elements that use a gradient backgrounding, this is done to keep the code clean insterado having loads of keyframe animations  */
+body {
+    height: 100vh;
+    background: linear-gradient(270deg, #91EBE8, #C2F7EB, #EAFAF9, #C1EDFA, #AEE5FA, #A0D4F8);
+    background-size: 400% 400%;
+    animation: GradientBackground 10s linear infinite;
+}
+
+/* keyframe animation for every element that uses a gradient background e.g buttons body etc */
+
+@keyframes GradientBackground {
+    0% {
+        background-position: 0% 0%;
+    }
+    20% {
+        background-position: 20% 20%;
+    }
+    40% {
+        background-position: 40% 40%;
+    }
+    60% {
+        background-position: 60% 60%;
+    }
+    80% {
+        background-position: 80% 80%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* used for the title as had issues centring things within the title, navbar, etc */
+.header-wrapper {
+    display: inline-block;
+    height: 20vh; 
+    padding-top: 30px;
+}
+
+/* styling for the login container that housing the form to login  */
+.login-container {
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px black;
+    border-radius: 8px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'helvetica';
+    margin: auto;
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* used not only for signing up but for logging in to, within the login header, the signup form is used for */
+.signinup-form {
+    margin-bottom: 15px;
+}
+
+.signinup-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.signinup-form input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid floralwhite;
+    border-radius: 4px;
+}
+
+/* used to style the submit button for signing up and logging in */
+.signinup-form input[type="submit"] {
+    background-color: #4CAF50;
+    color: floralwhite;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* hover styling for when the user hovers over the submit button with mouse */
+.signinup-form input[type="submit"]:hover {
+    background-color: #155919;
+}
+
+.signinup-form p {
+    text-align: center;
+    font-size: 14px;
+}
+
+/* styling used for every flash message, red colour used to grab attention and highlight importance */
+.flashes {
+    font-family: helvetica;
+    text-align: center;
+    font-size: 14px;
+    color: red;
+    align-items: center;
+}
+
+/* styling for the createpost.html file */
+.createpost-container {
+  text-align: center;
+  margin-top: 20px;
+  font-family: Helvetica ;
+}
+
+/* styling for the container on createpost.html */
+.createpost-container form {
+  padding: 20px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+/* styling for the textarea within the createposts-container on ctreatepost.html */
+.createpost-container textarea {
+  width: 100%;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid floralwhite;
+  font-family: Helvetica;
+  font-size: 18px;
+}
+
+/* styling for the input (post button) button within the createposts-container */
+.createpost-container input[type="submit"] {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: floralwhite;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  width: 75px;
+  height: 35px;
+}
+
+/* CSS styling for posts on post.html*/
+
+.posts-container { /* styling for the posts container itself */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: Helvetica;
+}
+
+.posts { /* styling for each individual post within posts-container */
+  background-color: floralwhite;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+  .button-wrapper {
+    text-align: center;
+}
+
+.button-wrapper form {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+/* uses a gradient background to add more colour and stark contrast to the page */
+#logout-button {
+    padding: 15px 15px;
+    background: linear-gradient(45deg,  #87CEEB, #45B3FA, #34A85A, #2E865F, #1ABC9C);
+    background-size: auto;
+    text-decoration: underline;
+    animation: GradientBackground 5s ease-in-out infinite;
+    cursor: pointer;
+    width: 100px;
+    height: 50px;
+    font-size: 18px;
+    font-family: helvetica;
+}
+
+/* also uses a gradient background similar to the logout button using the same keyframes */
+#delete-account-button {
+    padding: 15px 10px 10px 10px;
+    background: linear-gradient(45deg,  #FFC080, #FF8C69, #FF3737, #E60000, #8B0A1A);
+    background-size: auto;
+    text-decoration: underline;
+    animation: GradientBackground 1ms ease infinite;
+    cursor: pointer;
+    width: 200px; 
+    height: 50x;
+    font-size: 18px;
+}
+
+/* also uses a gradient background similar to the logout button useing the same keyframes  */
+#add-friend-button {
+    padding: 15px 15px;
+    background: linear-gradient(45deg, #FF69B4, #FFC0CB, #FF99CC, #FF66CC, #FF33CC);
+    background-size: auto;
+    animation: GradientBackground 5s ease-in-out infinite;
+    cursor: pointer;
+    width: 125px;
+    height: 55px;
+    font-size: 18px;
+}
+
+/* styling for the container that holds all the users posts on account.html */
+#account-posts-container {
+    display: inline-block;
+    background-color: floralwhite;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+
+/* styling for h2 element on account.html as wwell as otheruseraccounts.html */
+.accounth2 {
+    text-decoration: underline;
+    text-align: center;
+    padding-top: 20px;
+    font-family: Helvetica;
+    display: block;
+}
+
+/* styling for the delete post button on account.html */
+#delete-post {
+    background-color: #f44336; 
+    color: #fff; 
+    border: none; 
+    padding: 5px 5px; 
+    font-size: 10px; 
+    cursor: pointer; 
+}
+
+/* styling for account info shown on accoumt.html and otheruseraccoutns.html */
+.account-info-text {
+    font-family: Helvetica;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+/* styling for the informational text on about.html */
+.about-text-wrapper {
+    text-align: center;
+    font-family: helvetica;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* styling for the unordered listed text on about.html */
+.about-text-wrapper ul {
+    list-style-position: inside;
+    font-size: 20px;
+    font-family: helvetica;
+}
+
+/* styling for friendlist on account.html and otheruseraccounts.html*/
+/* basically shows a box with a list of accounts the user is friends with */
+#friend-list-wrapper {
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        overflow-y: auto;
+        height: 200px;
+        margin: 0 auto;
+        width: 30%;
+        font-family: helvetica;
+        font-size: 18px;
+}
+
+/* uses p element to turn the text into buttons with a gradient background that can be clicked on */
+#friend-list-wrapper p {
+    border: 1px solid floralwhite; 
+    border-radius: 5px; 
+    padding: 2px 5px; 
+    background: linear-gradient(45deg,#00BFFF, #00CCCC, #00FFFF, #00CCCC, #00BFFF);
+    background-size: auto;
+    animation: GradientBackground 5s ease-in-out infinite;
+    display: inline-block;
+}
+
+/* removes ugly href underlining from the friend list */
+#friend-list-wrapper a {
+    text-decoration: none;
+}

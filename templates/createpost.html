@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- only here for styling purposes, used in styles.css to make the page fade in-->
+<div class="float-in-wrapper">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- links to the the main CSS file and javascript file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- links to the navbar.css file as well as the navbar.js file for the navbar-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='navbar.css') }}">
+    <script src="{{ url_for('static', filename='navbar.js') }}"></script>
+
+    <title>Drift</title>
+</head>
+
+<body>
+    <header>
+        <div class="header-wrapper">
+            <!-- uses jinja to include the navbar -->
+            {% include 'navbar.html' %}
+            <h1 id="title">Create a Post</h1>
+        </div>
+    </header>
+
+    <div class="createpost-container">
+        <h2>Jot down your interesting thoughts here!</h2>
+        <form action="/createpost" method="post">
+            <!-- textarea is where the users input the text, placeholder text is what shows up in box before you type-->
+            <textarea name="content" placeholder="I am become death, destroyer of computers..."></textarea>
+            <!-- submit button with jinja flash message feature,
+             if the message is beloqw 1 char or over 200 chars then displays a message,
+             this will reload the page instead of submitting the post-->
+            <input type="submit" value="Post">
+                {% with messages = get_flashed_messages() %}
+                   {% if messages %}
+                        <p class="flashes">
+                            {% for message in messages %}
+                            <b>{{ message }}</b></br>
+                            {% endfor %}
+                        </p>
+                    {% endif %}
+                {% endwith %}
+        </form>
+    </div>
+</body>
+</html>
+</div>

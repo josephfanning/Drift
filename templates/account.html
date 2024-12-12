@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- only here for styling purposes, used in styles.css to make the page fade in-->
+<div class="float-in-wrapper"> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- links to the the main CSS file and javascript file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- links to the navbar.css file as well as the navbar.js file for the navbar-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='navbar.css') }}">
+    <script src="{{ url_for('static', filename='navbar.js') }}"></script>
+
+    <title>Drift</title>
+</head>
+<body>
+    <header>
+
+        <div class="header-wrapper">
+            <!-- uses jinja to include the navbar -->
+            {% include 'navbar.html' %}
+            <!-- also uses jinja to dynamically show the current users username via a query request from the database -->
+            <h1 id="title"> {{ user.username }}</h1>
+        </div>
+    </header>
+
+    <!-- button to log out of account -->
+    <div class="button-wrapper">
+        <form action="{{ url_for('logout') }}" method="POST">
+            <input type="submit" id="logout-button" value="Logout">
+        </form>
+        <!-- button to delete account, returns a confirmation meesage too to make sure the user doesn accidentally click delete account -->
+        <form action="{{ url_for('delete_account') }}" method="post" onsubmit="return confirm('Are you sure you want to delete your account?')">
+            <button type="submit"id ="delete-account-button">Delete Account</button>
+        </form>
+    </div>
+    <!-- displays the account creation date, number of freinds and a box of the users current friends, these usernames can be clicked on to take them to their account -->
+     <!-- uses jinja and strftime to show the date and format the date to DD/MM/YYYY instead of includign the time -->
+    <h3 class="account-info-text"> Your account was created on {{ user.created_at.strftime('%d-%m-%y') }}</h3>
+
+    <h2 class="account-info-text" >Your Friends: {{ num_friends }}</h2>
+
+    <!-- friend box that shows all of the users friends, these can be clicked on to take you to another other user account page -->
+    <div id="friend-list-wrapper">
+        {% for friend in friends %}
+            <p>
+                <!-- uses href to link usernames to user account pages, if the username is the same as the current user logged in, e.g user_id == session.user_id then link to account.html instead of otheruseraccounts.html -->
+                <a href="{% if friend.id == session.user_id %}{{ url_for('account') }}{% else %}{{ url_for('user_account', username=friend.username) }}{% endif %}">{{ friend.username }}</a>      
+            </p>
+        {% endfor %}
+    </div>
+
+    <h2 class="accounth2">Your Posts</h2>
+
+    <!-- used to only display your posts-->
+    <div class="posts-container">
+            {% for post in posts %} 
+                <div class="posts">
+                    <p>{{ post.content }}</p>
+                    <!-- also sends a confimation email just like the delete account button to reduce the isssue of accidentally deleting a post-->
+                    <form action="{{ url_for('delete_post', post_id=post.postID) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?')">
+                        <input type="submit" id="delete-post" value="Delete">
+                    </form>
+                </div>
+            {% endfor %}
+    </div>
+</body>
+</html>
+</div>
+ 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!-- only here for styling purposes, used in styles.css to make the page fade in-->
+<div class="float-in-wrapper">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- links to the CSS file-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Drift</title>
+</head>
+<body>
+    <!-- uses a wrapper div to center the content, -->
+ 
+        <h1 id="title" >Drift</h1>
+        <!-- code for form element for logging in-->
+        <div class="login-container">
+            <h2>Login</h2>
+            <!-- form for logging in, uses the login route and password hashing to make it mroe secure-->
+            <!-- uses the same styling as the signup for mon signup.html to promote more stylistic consistency-->
+            <form action="/login" method="post"> <!-- sends data to the signup route when completed -->
+                <div class="signinup-form">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="signinup-form">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="signinup-form">
+                    <input type="submit" value="Login">
+                </div>
+                <p>Don't have an account? <a href="/signup">Sign up</a></p>
+                <!-- if users username and/or password doesnt match, 
+                 they will be shown a flash message and the page will be reloaded,
+                 not allowing them to login-->
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <p class="flashes">
+                        {% for message in messages %}
+                        <b>{{ message }}</b></br>
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                {% endwith %}
+            </form>
+        </div>
+</body>
+</html>
+</div>
+ 

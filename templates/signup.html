@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- only here for styling purposes, used in styles.css to make the page fade in-->
+<div class="float-in-wrapper">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- links to the CSS file-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Drift</title>
+</head>
+
+<body>
+    <!-- uses a wrapper div to center the content, had to do this as the forms position
+        is set as absolute and i cannot move footer to bottom of page becsuse of this-->
+    <div class="header-wrapper">
+        <h1 id="title" >Drift</h1>
+
+        <!-- code for form element for logging in-->
+        <div class="login-container"> <!-- uses same styling as login container but different in the way in which it handles the data inputted -->
+            <h2>Create Account</h2>
+            <!-- form for signing up, reqires a username and password-->
+            <form action="/signup" method="post"> <!-- sends data to the signup route when completed -->
+                <div class="signinup-form">
+                    <label for="username">Create a username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="signinup-form">
+                    <label for="password">Create a password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <!-- button to create account-->
+                <div class="signinup-form">
+                    <input type="submit" value="Create Account">
+                </div>
+                <p> Just realised you already have an account? <a href="/login">Login Page</a></p>
+                <!-- if username is the same as another user, they will be shown a flash message and the page will be reloaded
+                 elseif password is less than 8 characters, they will be shown a flash message and the page will be reloaded-->
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <p class="flashes">
+                        {% for message in messages %}
+                        {{ message }}</br>
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                {% endwith %}
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+ </div>

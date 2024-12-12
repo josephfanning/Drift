@@ -1,0 +1,14 @@
+<!-- Functional sliding drawer-like nav bar that uses a variety of divs and id's to properly style and event(script) the nav bar -->                
+<!-- uses a jinja expression to route to the urls instead of statically linking -->
+<div class="drawer" id="myDrawer">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeDrawer()">&times;</a>
+    <a href="{{ url_for('posts') }}">Posts</a>
+    <a href="{{url_for('createpost')}}">Create Post</a>
+    <a href="{{url_for('account')}}">Account</a>
+    <a href="{{url_for('about')}}">About</a>
+</div>
+
+<!-- refers to the button at the top left of the page, uses an onclick event to open the nav bar up -->
+<span class="drawer-btn" onclick="openDrawer()">
+    <img src="{{ url_for('static', filename='menu-ivon.drawio.svg') }}" alt="menu-icon">
+</span>

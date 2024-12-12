@@ -1,0 +1,56 @@
+
+/* CSS styling for the sliding nav bar function */
+.drawer {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: floralwhite;
+    overflow-x: hidden;
+    transition: 0.4s;
+    padding-top: 60px;
+    left: 0;
+    font-weight: bold;
+    font-family: Helvetica;
+  }
+  
+  /* manipulates the text in the nav bar drawer */
+  .drawer a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* Change the color of links when hovering over hrefs in the nav bar */
+  .drawer a:hover { 
+    color: black;
+  }
+  
+  /* affects the nav bar drawers close button */
+  .drawer .close-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  /* refers to nav bar button (refer to main.html on top left of page for example) */
+  .drawer-btn {
+    font-size: 36px;
+    cursor: pointer;
+    padding-left: 10px;
+    display: inline-block;
+  }
+
+  .account-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
